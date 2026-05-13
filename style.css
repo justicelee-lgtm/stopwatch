@@ -1,0 +1,143 @@
+:root {
+  --bg: #000;
+  --text: #fff;
+  --muted: #8e8e93;
+  --separator: rgba(255, 255, 255, 0.12);
+  --green: #30d158;
+  --green-bg: rgba(48, 209, 88, 0.18);
+  --red: #ff453a;
+  --red-bg: rgba(255, 69, 58, 0.18);
+  --gray-bg: rgba(142, 142, 147, 0.24);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 430px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) 24px env(safe-area-inset-bottom);
+}
+
+.display {
+  text-align: center;
+  font-weight: 200;
+  font-size: clamp(64px, 19vw, 96px);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  padding: 18vh 0 6vh;
+  line-height: 1;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px 24px;
+}
+
+.btn {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.04);
+  font-size: 17px;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:active:not(:disabled) {
+  opacity: 0.55;
+}
+
+.btn:disabled {
+  cursor: default;
+}
+
+.btn-lap {
+  background: var(--gray-bg);
+  color: var(--text);
+}
+
+.btn-lap:disabled {
+  color: var(--muted);
+}
+
+.btn-start {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.btn-stop {
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.laps {
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-top: 0.5px solid var(--separator);
+  margin: 0 8px;
+}
+
+.lap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 4px;
+  border-bottom: 0.5px solid var(--separator);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-size: 17px;
+  color: var(--text);
+}
+
+.lap-label {
+  font-weight: 400;
+}
+
+.lap-split {
+  font-weight: 400;
+}
+
+.lap.fastest .lap-label,
+.lap.fastest .lap-split {
+  color: var(--green);
+}
+
+.lap.slowest .lap-label,
+.lap.slowest .lap-split {
+  color: var(--red);
+}
