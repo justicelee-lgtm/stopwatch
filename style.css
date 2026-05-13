@@ -45,13 +45,22 @@ body {
 .display {
   text-align: center;
   font-weight: 200;
-  font-size: clamp(64px, 19vw, 96px);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
   padding: 18vh 0 6vh;
   line-height: 1;
+  white-space: nowrap;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  font-size: clamp(64px, 19vw, 96px);
 }
+
+.display[data-size="sm"] { font-size: clamp(64px, 19vw, 96px); }
+.display[data-size="md"] { font-size: clamp(56px, 14vw, 88px); }
+.display[data-size="lg"] { font-size: clamp(44px, 10vw, 76px); }
+.display[data-size="xl"] { font-size: clamp(32px, 7.5vw, 60px); }
 
 .controls {
   display: flex;

@@ -60,6 +60,11 @@
     return String(n).padStart(2, "0");
   }
 
+  function intStr(n) {
+    if (n < 1e21) return String(n);
+    return n.toFixed(0);
+  }
+
   function formatTime(ms) {
     if (!Number.isFinite(ms) || ms < 0) ms = 0;
     const totalCs = Math.floor(ms / 10);
@@ -68,15 +73,29 @@
     const sec = totalSec % 60;
     const totalMin = Math.floor(totalSec / 60);
     const min = totalMin % 60;
-    const hr = Math.floor(totalMin / 60);
-    if (hr > 0) {
-      return pad2(hr) + ":" + pad2(min) + ":" + pad2(sec) + "." + pad2(cs);
+    const totalHr = Math.floor(totalMin / 60);
+    if (totalHr > 0) {
+      const hrStr = totalHr < 100 ? pad2(totalHr) : intStr(totalHr);
+      return hrStr + ":" + pad2(min) + ":" + pad2(sec) + "." + pad2(cs);
     }
     return pad2(min) + ":" + pad2(sec) + "." + pad2(cs);
   }
 
+  function setDisplayText(text) {
+    displayEl.textContent = text;
+    const len = text.length;
+    let size;
+    if (len <= 8) size = "sm";
+    else if (len <= 11) size = "md";
+    else if (len <= 14) size = "lg";
+    else size = "xl";
+    if (displayEl.dataset.size !== size) {
+      displayEl.dataset.size = size;
+    }
+  }
+
   function renderDisplay() {
-    displayEl.textContent = formatTime(currentElapsed());
+    setDisplayText(formatTime(currentElapsed()));
   }
 
   function renderButtons() {
@@ -174,7 +193,7 @@
       return;
     }
     const total = currentElapsed();
-    displayEl.textContent = formatTime(total);
+    setDisplayText(formatTime(total));
     const firstLap = lapsEl.firstElementChild;
     if (firstLap) {
       const splitEl = firstLap.querySelector(".lap-split");
